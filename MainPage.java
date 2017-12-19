@@ -30,9 +30,9 @@ public class MainPage {
 		JButton b1 = new JButton( "商品维护" );
 		JButton b2 = new JButton( "前台收银" );
 		JButton b3 = new JButton( "商品管理" );
-		p.add( b1, BorderLayout.CENTER );	
-		p.add( b2, BorderLayout.CENTER );	
-		p.add( b3, BorderLayout.CENTER );	
+		p.add( b1 );	
+		p.add( b2 );	
+		p.add( b3 );	
 		a.getContentPane().add( "Center", p );
 		a.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		a.pack();
