@@ -7,3 +7,7 @@
 2. 所有的语句都写在了入口函数中'public static void main(String[] args){}'中
 
 3. 还不知道Container的作用
+
+## 完成了CommodityMaintenancePage的初步显示，存在问题：
+
+与上面类似
