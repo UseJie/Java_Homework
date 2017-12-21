@@ -11,3 +11,13 @@
 ## 完成了CommodityMaintenancePage的初步显示，存在问题：
 
 与上面类似
+
+## 完成了CommodityManagementPage的初步显示，存在问题：
+
+与上类似
+
+## 完成了从MainPage可以触发事件到CommodityMainTenancePage、CommodityManagementPage、SalesclerkPage中，可以完善的地方：
+
+1. 可以设置固定JFrame的大小
+
+2. 打开新窗口可以选择错开或者关闭就窗口，实现关闭就窗口可以设置放回上一个窗口的功能。

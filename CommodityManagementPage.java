@@ -16,8 +16,13 @@ public class CommodityManagementPage extends JFrame {
 		p.add( b1 );
 		p.add( b2 );
 		getContentPane().add( "Center", p );
+		setTitle( "商品管理" );
+		pack();
+		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		setLocationRelativeTo( null );
+		setVisible( true );
 	}
-
+/*
 	public static void main(String[] args) {
 		CommodityManagementPage c = new CommodityManagementPage();
 		c.setTitle( "商品管理" );
@@ -26,4 +31,6 @@ public class CommodityManagementPage extends JFrame {
 		c.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		c.setLocationRelativeTo( null );
 	}
+*/
+
 }

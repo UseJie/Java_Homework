@@ -33,9 +33,59 @@ public class MainPage {
 		p.add( b1 );	
 		p.add( b2 );	
 		p.add( b3 );	
+		
+		b1.addActionListener( new ButtonToComMain() );
+		b2.addActionListener( new ButtonToComManagement() );
+		b3.addActionListener( new ButtonToSales() );
+
 		a.getContentPane().add( "Center", p );
 		a.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		a.pack();
 		a.setVisible( true );
+	}
+}
+	
+class ButtonToComMain implements ActionListener {
+	@Override
+	public void actionPerformed( ActionEvent e ) {
+		Object obj = e.getSource();
+		if( obj instanceof JButton ) {
+			JButton srcBtn = (JButton) obj;
+			System.out.println( "您单机了按钮:" + srcBtn.getText() );
+			new CommodityMaintenancePage();
+		}
+		else {
+			System.out.println( "Not Distinguish Source" );
+		}
+	}
+}	
+
+class ButtonToComManagement implements ActionListener {
+	@Override
+	public void actionPerformed( ActionEvent e ) {
+		Object obj = e.getSource();
+		if( obj instanceof JButton ) {
+			JButton srcBtn = (JButton) obj;
+			System.out.println( "您单机了按钮:" + srcBtn.getText() );
+			new CommodityManagementPage();
+		}
+		else {
+			System.out.println( "Not Distinguish Source" );
+		}
+	}
+}
+
+class ButtonToSales implements ActionListener {
+	@Override
+	public void actionPerformed( ActionEvent e ) {
+		Object obj = e.getSource();
+		if( obj instanceof JButton ) {
+			JButton srcBtn = (JButton) obj;
+			System.out.println( "您单机了按钮:" + srcBtn.getText() );
+			new SalesclerkLogonPage();
+		}
+		else {
+			System.out.println( "Not Distinguish Source" );
+		}
 	}
 }

@@ -17,8 +17,13 @@ public class SalesclerkLogonPage extends JFrame {
 		p.add( b1 );
 		p.add( b2 );
 		getContentPane().add( "Center", p );
+		setTitle("前台收银登陆" );
+		pack();
+		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		setLocationRelativeTo( null );
+		setVisible( true);
 	}
-
+/*
 	public static void main(String[] main) {
 		SalesclerkLogonPage s = new SalesclerkLogonPage();
 		s.setTitle( "前台收银登录" );
@@ -27,4 +32,5 @@ public class SalesclerkLogonPage extends JFrame {
 		s.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		s.setLocationRelativeTo( null );
 	}
+*/
 }

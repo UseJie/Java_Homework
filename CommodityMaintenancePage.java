@@ -23,7 +23,13 @@ public class CommodityMaintenancePage extends JFrame {
 		p.add( b4 );
 		p.add( b5 );
 		getContentPane().add( "Center", p );
-	}	
+		setTitle( "商品维护" );
+		pack();
+		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		setLocationRelativeTo( null );
+		setVisible( true );
+}	
+/*
 	public static void main(String[] args) {
 		CommodityMaintenancePage c = new CommodityMaintenancePage();
 		c.setTitle( "商品维护界面" );
@@ -32,4 +38,5 @@ public class CommodityMaintenancePage extends JFrame {
 		c.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		c.setLocationRelativeTo( null );
 	}
+*/
 }
