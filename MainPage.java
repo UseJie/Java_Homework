@@ -11,10 +11,8 @@ package Interface;
 
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
 import javax.swing.event.*;
-
 import java.util.*;
 
 public class MainPage {
@@ -23,7 +21,6 @@ public class MainPage {
 		Container c = new Container();
 		JPanel p = new JPanel();
 		
-		a.setSize( 200, 200 );
 		a.setLocation( 100, 100 );
 		a.setLayout( new BorderLayout( 5, 5 ) );//  组件横、纵间距为5个像素
 		p.setLayout( new FlowLayout( 1, 5, 5 ) );
@@ -40,6 +37,7 @@ public class MainPage {
 
 		a.getContentPane().add( "Center", p );
 		a.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		a.setLocationRelativeTo( null );
 		a.pack();
 		a.setVisible( true );
 	}

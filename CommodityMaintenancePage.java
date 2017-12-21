@@ -1,5 +1,6 @@
 package Interface;
 
+import Interface.ComMaint.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -22,6 +23,7 @@ public class CommodityMaintenancePage extends JFrame {
 		p.add( b3 );
 		p.add( b4 );
 		p.add( b5 );
+		b1.addActionListener( new ButtonToAddCom() );
 		getContentPane().add( "Center", p );
 		setTitle( "商品维护" );
 		pack();
@@ -39,4 +41,19 @@ public class CommodityMaintenancePage extends JFrame {
 		c.setLocationRelativeTo( null );
 	}
 */
+}
+
+class ButtonToAddCom implements ActionListener {
+	@Override
+	public void actionPerformed( ActionEvent e ) {
+		Object obj = e.getSource();
+		if( obj instanceof JButton ) {
+			JButton srcBtn = (JButton) obj;
+			System.out.println( "您单击了按钮:" + srcBtn.getText() );
+			new AddCommodityPage();
+		}	
+		else {
+			System.out.println( "Not Distinguish Source" );
+		}
+	}
 }
