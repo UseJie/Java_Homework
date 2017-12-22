@@ -25,8 +25,8 @@ public class MainPage {
 		a.setLayout( new BorderLayout( 5, 5 ) );//  组件横、纵间距为5个像素
 		p.setLayout( new GridLayout( 0, 1 ) );
 		JButton b1 = new JButton( "商品维护" );
-		JButton b2 = new JButton( "前台收银" );
-		JButton b3 = new JButton( "商品管理" );
+		JButton b2 = new JButton( "商品管理" );
+		JButton b3 = new JButton( "前台收银" );
 		p.add( b1 );	
 		p.add( b2 );	
 		p.add( b3 );	

@@ -36,4 +36,8 @@
 
 ## SelectCommodityPage
 
+## SalesclerkLogonPage
+
+1. 触发事件actionPerformed还未重写
+
 

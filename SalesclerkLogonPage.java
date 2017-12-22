@@ -6,7 +6,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.util.*;
 
-public class SalesclerkLogonPage extends JFrame {
+public class SalesclerkLogonPage extends JFrame implements ActionListener{
 	JPanel p = new JPanel();
 	JButton b1 = new JButton( "登录" );
 	JButton b2 = new JButton( "退出" );
@@ -16,12 +16,19 @@ public class SalesclerkLogonPage extends JFrame {
 		p.setLayout( new FlowLayout( 1, 5, 5 ) );
 		p.add( b1 );
 		p.add( b2 );
+		b1.addActionListener( this );
+		b2.addActionListener( this );
 		getContentPane().add( "Center", p );
 		setTitle("前台收银登陆" );
 		pack();
-		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		setDefaultCloseOperation( DISPOSE_ON_CLOSE );
 		setLocationRelativeTo( null );
 		setVisible( true);
+	}
+
+	@Override
+	public void actionPerformed( ActionEvent e ) {
+			
 	}
 /*
 	public static void main(String[] main) {
