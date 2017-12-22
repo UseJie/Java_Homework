@@ -24,4 +24,16 @@
 
 ## 完成AddCommodityPage
 
-## ChangeCommodityPage 未完成
+## ChangeCommodityPage，存在问题：
+
+1. 关闭窗口时，整个程序退出。
+
+2. 将所有的合并在一个JFrame上 
+
+### ChangeCommodityPage 问题基本上完成，后续将继续修改
+
+## ShowAllCommodityPage
+
+## SelectCommodityPage
+
+
