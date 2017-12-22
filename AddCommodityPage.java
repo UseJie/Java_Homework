@@ -5,7 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
-public class AddCommodityPage extends JFrame {
+public class AddCommodityPage extends JFrame implements ActionListener {
 	JPanel p = new JPanel();
 	JPanel p1 = new JPanel();	
 
@@ -18,7 +18,7 @@ public class AddCommodityPage extends JFrame {
 	JTextField jt3 = new JTextField();
 
 	JButton b1 = new JButton( "确定" );
-	JButton b2 = new JButton( "取消" );
+	JButton b2 = new JButton( "重置" );
 
 	public AddCommodityPage() {
 		setLayout( new BorderLayout() );
@@ -32,13 +32,34 @@ public class AddCommodityPage extends JFrame {
 		p.add( jt3 );
 		p1.add( b1 );
 		p1.add( b2 );
+		b1.addActionListener( this );
+		b2.addActionListener( this );
 		getContentPane().add( "Center", p );
 		getContentPane().add( "South", p1 );
 		pack();
-		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		setDefaultCloseOperation( DISPOSE_ON_CLOSE );
 		setLocationRelativeTo( null );
 		setVisible( true );
 	}
+	@Override
+	public void actionPerformed( ActionEvent e ) {
+		Object obj = e.getSource();
+		if( obj instanceof JButton ) {
+			JButton srcBtn = (JButton) obj;
+			if( srcBtn.getText().equals( "确定" ) ) {
+				//将数据添加到数据库
+				jt1.setText( null );
+				jt2.setText( null );
+				jt3.setText( null );			
+			}
+			if( srcBtn.getText().equals( "重置" ) ) {
+				jt1.setText( null );			
+				jt2.setText( null );			
+				jt3.setText( null );			
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 		new AddCommodityPage();
 	}

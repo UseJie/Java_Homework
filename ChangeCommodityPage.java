@@ -34,7 +34,7 @@ public class ChangeCommodityPage extends JFrame implements ActionListener {
 
 	public ChangeCommodityPage() {
 		setSize( 500, 500 );
-		setLayout( new GridLayout( 1, 1 ) );
+		setLayout( new BorderLayout() );
 		p1.setLayout( new GridLayout( 2, 1 ) );
 		p1.add( j1 );
 		p1.add( jt1 );
@@ -73,6 +73,13 @@ public class ChangeCommodityPage extends JFrame implements ActionListener {
 		}
 		else if( obj instanceof JButton ) {
 			JButton srcBtn = (JButton) obj;
+			JButton b4 = new JButton( "确定" );
+			JButton b5 = new JButton( "取消" );
+			JPanel jpb = new JPanel();
+			jpb.setLayout( new FlowLayout() );
+			jpb.add( b4 );
+			jpb.add( b5 );
+			getContentPane().add( "South", jpb );
 			if( srcBtn.getText().equals( "更改商品名称" ) ) {
 				p2.removeAll();
 				remove( p2 );

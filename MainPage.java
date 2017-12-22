@@ -23,7 +23,7 @@ public class MainPage {
 		
 		a.setLocation( 100, 100 );
 		a.setLayout( new BorderLayout( 5, 5 ) );//  组件横、纵间距为5个像素
-		p.setLayout( new FlowLayout( 1, 5, 5 ) );
+		p.setLayout( new GridLayout( 0, 1 ) );
 		JButton b1 = new JButton( "商品维护" );
 		JButton b2 = new JButton( "前台收银" );
 		JButton b3 = new JButton( "商品管理" );
@@ -50,7 +50,13 @@ class ButtonToComMain implements ActionListener {
 		if( obj instanceof JButton ) {
 			JButton srcBtn = (JButton) obj;
 			System.out.println( "您单机了按钮:" + srcBtn.getText() );
-			new CommodityMaintenancePage();
+			CommodityMaintenancePage amtp = new CommodityMaintenancePage();
+			amtp.addWindowListener( new java.awt.event.WindowAdapter() {
+				public void windowClosing(java.awt.event.WindowEvent e ) {
+					amtp.dispose();
+					System.out.println( "ComMaint exit" );
+				}	
+			});
 		}
 		else {
 			System.out.println( "Not Distinguish Source" );
