@@ -44,6 +44,10 @@ public class ChangeCommodityPage extends JFrame implements ActionListener {
 		p2.add( jb1 );
 		p2.add( jb2 );
 		p2.add( jb3 );
+		
+		jb1.addActionListener( this );
+		jb2.addActionListener( this );
+		jb3.addActionListener( this );
 
 		getContentPane().add( p1 );
 		
@@ -62,9 +66,43 @@ public class ChangeCommodityPage extends JFrame implements ActionListener {
 			JTextField srcTex = (JTextField) obj;
 			System.out.println( "您输入了" + srcTex.getText() );
 			jt1.setText( null );
-			//this.removeLayoutComponent( p1 );
+			p1.removeAll();
+			remove( p1 );
 			getContentPane().add( p2 );
 			pack();
+		}
+		else if( obj instanceof JButton ) {
+			JButton srcBtn = (JButton) obj;
+			if( srcBtn.getText().equals( "更改商品名称" ) ) {
+				p2.removeAll();
+				remove( p2 );
+				p3.setLayout( new GridLayout( 1, 0 ) );
+				p3.add( j3 );
+				p3.add( jt5 );
+				getContentPane().add( p3 );
+				pack();
+			}
+			
+			if( srcBtn.getText().equals( "更改商品价格" ) ) {
+				p2.removeAll();
+				remove( p2 );
+				p3.setLayout( new GridLayout( 1, 0 ) );
+				p3.add( j4 );
+				p3.add( jt6 );
+				getContentPane().add( p3 );
+				pack();
+			}
+	
+			if( srcBtn.getText().equals( "更改商品数量" ) ) {
+				p2.removeAll();
+				remove( p2 );
+				p3.setLayout( new GridLayout( 1, 0 ) );
+				p3.add( j5 );
+				p3.add( jt7 );
+				getContentPane().add( p3 );
+				pack();
+			}
+
 		}
 		else {
 			System.out.println( "Not Distinguish Source" );

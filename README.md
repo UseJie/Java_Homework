@@ -21,3 +21,7 @@
 1. 可以设置固定JFrame的大小
 
 2. 打开新窗口可以选择错开或者关闭就窗口，实现关闭就窗口可以设置放回上一个窗口的功能。
+
+## 完成AddCommodityPage
+
+## ChangeCommodityPage 未完成
