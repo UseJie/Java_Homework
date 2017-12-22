@@ -28,7 +28,16 @@ public class SalesclerkLogonPage extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed( ActionEvent e ) {
-			
+		Object obj = e.getSource();
+		if( obj instanceof JButton ) {
+			JButton srcBtn = (JButton) obj;
+			if( srcBtn.getText().equals( "登陆" ) ) {
+				//new 一个登录界面
+			}
+			if( srcBtn.getText().equals( "退出" ) ) {
+				dispose();
+			}
+		}	
 	}
 /*
 	public static void main(String[] main) {
