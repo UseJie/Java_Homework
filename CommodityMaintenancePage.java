@@ -79,7 +79,19 @@ public class CommodityMaintenancePage extends JFrame implements ActionListener{
 				} );
 			} 
 			if( srcBtn.getText().equals( "显示所有商品" ) ) {} 
-			if( srcBtn.getText().equals( "查询商品" ) ) {} 
+
+
+
+			if( srcBtn.getText().equals( "查询商品" ) ) {
+				SelectCommodityPage secp = new SelectCommodityPage();
+				secp.addWindowListener( new java.awt.event.WindowAdapter() {
+					public void windowClosing( java.awt.event.WindowEvent e) {
+						secp.dispose();
+						System.out.println( "scp exit" );
+						setVisible( true );
+					}
+				} );
+			} 
 			//if( srcBtn.getText().equals( "关闭" ) ) {
 			//	dispose();
 			//}

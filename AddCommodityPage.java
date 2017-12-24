@@ -6,19 +6,20 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 public class AddCommodityPage extends JFrame implements ActionListener {
-	JPanel p = new JPanel();
-	JPanel p1 = new JPanel();	
 
-	JLabel jL1 = new JLabel( "添加商品名称" );
-	JLabel jL2 = new JLabel( "添加商品价格" );
-	JLabel jL3 = new JLabel( "添加商品数量" );
+	public JPanel p = new JPanel();
+	public JPanel p1 = new JPanel();	
 
-	JTextField jt1 = new JTextField();
-	JTextField jt2 = new JTextField();
-	JTextField jt3 = new JTextField();
+	public JLabel jL1 = new JLabel( "添加商品名称" );
+	public JLabel jL2 = new JLabel( "添加商品价格" );
+	public JLabel jL3 = new JLabel( "添加商品数量" );
 
-	JButton b1 = new JButton( "确定" );
-	JButton b2 = new JButton( "重置" );
+	public JTextField jt1 = new JTextField();
+	public JTextField jt2 = new JTextField();
+	public JTextField jt3 = new JTextField();
+
+	public JButton b1 = new JButton( "确定" );
+	public JButton b2 = new JButton( "重置" );
 
 	public AddCommodityPage() {
 		setLayout( new BorderLayout() );

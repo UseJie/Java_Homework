@@ -9,16 +9,32 @@ import java.util.*;
 public class SalesclerkLogonPage extends JFrame implements ActionListener{
 	JPanel p = new JPanel();
 	JButton b1 = new JButton( "登录" );
-	JButton b2 = new JButton( "退出" );
+	JButton b2 = new JButton( "重置" );
+
+	JPanel p2 = new JPanel();
+	JLabel j1 = new JLabel( "请输入用户名" );
+	JTextField jt1 = new JTextField();
+	JLabel j2 = new JLabel( "请输入密码" );
+	JTextField jt2 = new JTextField(); 
 
 	public SalesclerkLogonPage() {
-		setLayout( new BorderLayout( 5, 5 ) );
-		p.setLayout( new FlowLayout( 1, 5, 5 ) );
+		setLayout( new GridLayout( 0, 1 ) );
+		p.setLayout( new FlowLayout() );
 		p.add( b1 );
 		p.add( b2 );
 		b1.addActionListener( this );
 		b2.addActionListener( this );
-		getContentPane().add( "Center", p );
+
+		p2.setLayout( new GridLayout( 0, 1 ) );
+		p2.add( j1 );
+		p2.add( jt1 );
+		p2.add( j2 );
+		p2.add( jt2 );
+
+		//getContentPane().add( p2 );
+		//getContentPane().add( p );
+		add( p2 );
+		add( p );
 		setTitle("前台收银登陆" );
 		pack();
 		setDefaultCloseOperation( DISPOSE_ON_CLOSE );
@@ -32,21 +48,16 @@ public class SalesclerkLogonPage extends JFrame implements ActionListener{
 		if( obj instanceof JButton ) {
 			JButton srcBtn = (JButton) obj;
 			if( srcBtn.getText().equals( "登陆" ) ) {
-				//new 一个登录界面
+				//在售货员表中查询与售货员相匹配的密码
 			}
-			if( srcBtn.getText().equals( "退出" ) ) {
-				dispose();
+			if( srcBtn.getText().equals( "重置" ) ) {
+				System.out.println( "正在重新输入" );
+				jt1.setText( null );
+				jt2.setText( null );
 			}
 		}	
 	}
-/*
 	public static void main(String[] main) {
-		SalesclerkLogonPage s = new SalesclerkLogonPage();
-		s.setTitle( "前台收银登录" );
-		s.pack();
-		s.setVisible( true );
-		s.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-		s.setLocationRelativeTo( null );
+		new SalesclerkLogonPage();
 	}
-*/
 }

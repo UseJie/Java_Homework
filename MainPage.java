@@ -86,8 +86,8 @@ class ButtonToSales implements ActionListener {
 		if( obj instanceof JButton ) {
 			JButton srcBtn = (JButton) obj;
 			System.out.println( "您单机了按钮:" + srcBtn.getText() );
-			SalesClerkLogon scl = new SalesclerkLogonPage();
-			scl.addWindowListener( new Java.awt.event.WindowAdapter() {
+			SalesclerkLogonPage scl = new SalesclerkLogonPage();
+			scl.addWindowListener( new java.awt.event.WindowAdapter() {
 				public void windowClosing( java.awt.event.WindowEvent e ) {
 					scl.dispose();
 				}

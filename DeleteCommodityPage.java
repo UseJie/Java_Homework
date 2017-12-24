@@ -48,7 +48,7 @@ public class DeleteCommodityPage extends JFrame implements ActionListener {
 		jb2.addActionListener( this );
 
 		pack();
-		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		setDefaultCloseOperation( DISPOSE_ON_CLOSE );
 		setLocationRelativeTo( null );
 		setVisible( true );
 	}
