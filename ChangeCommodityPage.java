@@ -125,6 +125,7 @@ public class ChangeCommodityPage extends JFrame implements ActionListener {
 		if( obj instanceof JTextField ) {
 			JTextField srcTex = (JTextField) obj;
 			System.out.println( "您输入了" + srcTex.getText() );
+			//查询输入商品的信息到对应的JTextField中
 			jt1.setText( null );
 			p1.removeAll();
 			remove( p1 );

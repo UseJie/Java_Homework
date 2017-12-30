@@ -39,10 +39,16 @@ public class ShoppingAccountPage extends JFrame {
 		setLayout( new GridLayout( 0, 1 ) );
 
 		jtb1.setPreferredScrollableViewportSize( new Dimension( 500, 300 ));
-		DefaultTableModel model =(DefaultTableModel)jtb1.getModel();
-		model.add( new String[]{"oragin","3","40"});
-		JScrollPane scollPane = new JScrollPane( jtb1 );
-		
+		jtb1.setAutoResizeMode( JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS );
+		TableColumn column = null;
+		for( int i =0; i < 2; i++ ) {
+			column = jtb1.getColumnModel().getColumn(i);
+			if( ( i%2 ) == 0 )
+				column.setPreferredWidth( 150 );
+			else
+				column.setPreferredWidth( 50 );
+		}
+		JScrollPane scrollPane = new JScrollPane( jtb1 );
 		jp1.setLayout( new GridLayout( 0, 1 ) );
 		jp1.add( j1 );
 		jp1.add( jt1 );
@@ -66,7 +72,7 @@ public class ShoppingAccountPage extends JFrame {
 		jp5.add( jt5 );
 	
 		add( jp1 );
-		add( jtb1 );
+		add( scrollPane );
 		add( jp2 );
 		add( jp3 );
 		add( jp4 );
@@ -76,7 +82,14 @@ public class ShoppingAccountPage extends JFrame {
 		setDefaultCloseOperation( DISPOSE_ON_CLOSE );
 		setLocationRelativeTo( null );
 		pack();
+		show();
 		setVisible( true );
+		
+		addWindowListener( new WindowAdapter() {
+			public void windowClosing( WindowEvent e ) {
+				System.exit( 0 );
+			}
+		});
 	}
 
 	public static void main(String[] args) {

@@ -20,7 +20,7 @@ public class DeleteCommodityPage extends JFrame implements ActionListener {
 
 	JPanel jp3 = new JPanel();
 	JButton jb1 = new JButton( "确定" ); 
-	JButton jb2 = new JButton( "取消" ); 
+	//JButton jb2 = new JButton( "取消" ); 
 
 	public DeleteCommodityPage() {
 		setLayout( new BorderLayout() );
@@ -41,11 +41,11 @@ public class DeleteCommodityPage extends JFrame implements ActionListener {
 
 		jp3.setLayout( new FlowLayout() );
 		jp3.add( jb1 );
-		jp3.add( jb2 );
+		//jp3.add( jb2 );
 		getContentPane().add( "South", jp3 );
 
 		jb1.addActionListener( this );
-		jb2.addActionListener( this );
+		//jb2.addActionListener( this );
 
 		pack();
 		setDefaultCloseOperation( DISPOSE_ON_CLOSE );
@@ -67,21 +67,41 @@ public class DeleteCommodityPage extends JFrame implements ActionListener {
 			JButton srcBtn = (JButton) obj;
 			if( srcBtn.getText().equals( "确定" ) ) {
 				//实现从数据库中删除
+				if( jt2.getText()!=null && !jt2.getText().equals("") && jt3.getText()!=null && !jt3.getText().equals("") && jt4.getText()!=null && !jt4.getText().equals("") ) {
+					//没有全部输入	
+					System.out.println("delete success");
+				}
+				else {
+					//有全部输入
+					System.out.println("pleases input add messages");
+				}
 				jt2.setText( null );
 				jt3.setText( null );
 				jt4.setText( null );
 				System.out.println( "您单击了按钮\"确定\"" );
 			} 
-			if( srcBtn.getText().equals( "取消" ) ) {
+			/*if( srcBtn.getText().equals( "取消" ) ) {
 				//实现推出单前界面
 				System.out.println( "您单击了按钮\"取消\"" );
 				this.dispose();
 			}
+			*/
 		}
 		else {
 			System.out.println( "Not Distinguisg Source" );
 		}
 	}
+
+	public static Vector prepareQueryDataForGname( String gname ) {
+		Connection conn = null;
+		Vector data = new Vector();
+		PreparedStatement pst = null;
+		try {
+				
+		}catch() 
+
+		{}
+	}	
 
 	public static void main( String[] args ) {
 		new DeleteCommodityPage();
