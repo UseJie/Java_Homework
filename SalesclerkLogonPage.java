@@ -1,5 +1,6 @@
 package Interface;
 
+import Interface.SLogon.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -33,6 +34,11 @@ public class SalesclerkLogonPage extends JFrame {
 					|| jt1.getText().equals("请输入完整信息")) {
 					jt1.setText( "请输入完整信息" );
 					jpf1.setText("");
+					jt1.addMouseListener( new MouseAdapter() {
+						public void mouseClicked( MouseEvent me ) {
+							jt1.setText(null);
+						}
+					});
 				}
 				else {
 					Connection conn = null;
@@ -51,11 +57,29 @@ public class SalesclerkLogonPage extends JFrame {
 							String pwd = rs.getString( "spassword" );
 							if( jpassword.equals(pwd) ) {
 								jt1.setText("密码正确");
+								setVisible(false);
+								jt1.addMouseListener( new MouseAdapter() {
+									public void mouseClicked( MouseEvent me ) {
+										jt1.setText(null);
+									}
+								});
+								ShoppingAccountPage sap = new ShoppingAccountPage();
 								jpf1.setText(null);
+								sap.addWindowListener( new WindowAdapter() {
+									public void widowClosing( WindowEvent we ) {
+										sap.dispose();
+										setVisible(true);
+									}
+								});
 							}
 							else {
 								//密码错误
 								jt1.setText( "密码错误" );
+								jt1.addMouseListener( new MouseAdapter() {
+									public void mouseClicked( MouseEvent me ) {
+										jt1.setText(null);
+									}
+								});
 							}
 						}
 						rs.close();
@@ -72,7 +96,8 @@ public class SalesclerkLogonPage extends JFrame {
 		} );
 		b2.addActionListener( new ActionListener() {
 			public void actionPerformed( ActionEvent e ) {
-				
+				jt1.setText(null);
+				jpf1.setText(null);
 			}
 		} );
 
