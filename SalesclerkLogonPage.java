@@ -5,7 +5,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.util.*;
-
+import java.sql.*;
+import DB.*;
 public class SalesclerkLogonPage extends JFrame {
 	JPanel p = new JPanel();
 	JButton b1 = new JButton( "登录" );
@@ -28,6 +29,44 @@ public class SalesclerkLogonPage extends JFrame {
 				char[] s = jpf1.getPassword();
 				String jpassword = new String(s);
 				System.out.println(jpassword);
+				if( jt1.getText().equals("") || jpassword.equals("") 
+					|| jt1.getText().equals("请输入完整信息")) {
+					jt1.setText( "请输入完整信息" );
+					jpf1.setText("");
+				}
+				else {
+					Connection conn = null;
+					PreparedStatement pst = null;
+					ResultSet rs = null;
+					String url = "jdbc:mysql://localhost:3306/supermarketDB";
+					String user = "root";
+					String password = "Userjie1119";
+					try {
+						conn = DriverManager.getConnection( url, user, password );
+						String sql = "SELECT * FROM salesman WHERE sname=?";
+						pst = conn.prepareStatement( sql );
+						pst.setString( 1, jt1.getText().toString() );
+						rs = pst.executeQuery();
+						if( rs.next() ) {
+							String pwd = rs.getString( "spassword" );
+							if( jpassword.equals(pwd) ) {
+								jt1.setText("密码正确");
+								jpf1.setText(null);
+							}
+							else {
+								//密码错误
+								jt1.setText( "密码错误" );
+							}
+						}
+						rs.close();
+						pst.close();
+						conn.close();
+					}catch( SQLException sqle ) {
+						sqle.printStackTrace();
+					}finally {
+
+					}
+				}
 			}
 
 		} );
