@@ -34,10 +34,18 @@ public class ShoppingAccountPage extends JFrame implements ActionListener{
 	Vector title = new Vector();
 	DefaultTableModel defaultModel = null;
 
-	Connection conn = DbConn.getconn();
+	Connection conn = null;
 	PreparedStatement pst = null;
-	ResultSet rs = null;
 	String gname;
+	
+	int dataNum;//用来记录数据库中数量
+	String dataName;
+	int dataPrice;
+	
+	Integer jt3Data;//总价
+	Integer jt4Data;//收款
+	Integer jt5Data;//找零
+	
 	public ShoppingAccountPage() {
 		setLayout( new GridLayout( 0, 1 ) );
 
@@ -74,27 +82,43 @@ public class ShoppingAccountPage extends JFrame implements ActionListener{
 		*/
 		jt2.addActionListener( new ActionListener() {
 			public void actionPerformed( ActionEvent ae ) {
-				if( data.size() > 0 ) {
-					Integer dataNum = Integer.parseInt(data.get(3).toString());
-					Integer jtNum = Integer.parseInt(jt2.getText());
-					if( dataNum >= jtNum && jtNum >= 0 ) {
-						System.out.println( dataNum + " "+ jtNum );
-						//更新数据中的数量
+				Integer jtNum = Integer.parseInt(jt2.getText());
+				if( dataNum >= jtNum && jtNum >= 0 ) {
+					System.out.println( dataNum + " "+ jtNum );
+					//更新数据中的数量
+					Integer updateNum = new Integer(dataNum - jtNum);
+					conn = DbConn.getconn();
+					String sql = "UPDATE GOODS SET gnum=? WHERE gname=?";
+					try{
+						pst = conn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS );
+						String insertData = new String( updateNum.toString() );
+						pst.setString( 1, insertData );
+						pst.setString( 2, dataName );
+						int rs = pst.executeUpdate();
+						if( rs > 0) {
+							//计算总价
+							jt3Data = new Integer ( jtNum * dataPrice );
+							jt3.setText( jt3Data.toString() );
+						}
+						else {
+							jt1.setText( "系统出错,请重新输入" );
+							data.removeAllElements();
+							defaultModel.setDataVector( data, title );
+							jt2.setText( null );
+							jt3.setText( null);
+						}
+					}catch( SQLException sqle ) {
+						System.out.println( "SQLException: " + sqle.getMessage() );
+					}finally {
+						DbClose.addClose( pst, conn );
 					}
-					else {
-						jt2.setText("请输入正确的数量");
-						jt2.addMouseListener( new MouseAdapter() {
-							public void mouseClicked( MouseEvent me ) {
-								jt2.setText(null);
-							}
-						});
-					}
+					
 				}
 				else {
-					jt1.setText("请输入正确的商品名");
-					jt1.addMouseListener( new MouseAdapter() {
+					jt2.setText("请输入正确的数量");
+					jt2.addMouseListener( new MouseAdapter() {
 						public void mouseClicked( MouseEvent me ) {
-							jt1.setText(null);
+							jt2.setText(null);
 						}
 					});
 				}
@@ -105,10 +129,47 @@ public class ShoppingAccountPage extends JFrame implements ActionListener{
 		jp3.add( j3 );
 		jp3.add( jt3 );
 
+
 		jp4.setLayout( new GridLayout( 0, 1 ) );
 		jp4.add( j4 );
 		jp4.add( jt4 );
-
+		/*
+		 * Jt4.addActonListener:
+		 * 1. 不重复检验前面是否为空
+		 * 2. 直接获取jt4Data//收款
+		 * 3. 然后设置jt5Data//找零
+		 */
+		jt4.addActionListener( new ActionListener() {
+			public void actionPerformed( ActionEvent e ) {
+				if( !jt4.getText().equals("") &&
+					jt4.getText()!=null) {
+					jt4Data = Integer.parseInt(jt4.getText());
+					if( jt4Data >= jt3Data ) {
+						jt5Data = jt4Data - jt3Data;
+						jt5.setText( jt5Data.toString() );
+					}
+					else {
+						//收款不够
+						jt4.setText( "收款不够" );
+						jt4.addMouseListener( new MouseAdapter() {
+							public void mouseClicked( MouseEvent me ) {
+								jt4.setText(null);
+							}
+						});
+					}
+				}
+				else {
+					//请给出有效输入
+					jt4.setText( "请输入收款金额" );
+					jt4.addMouseListener( new MouseAdapter() {
+						public void mouseClicked( MouseEvent me ) {
+							jt2.setText(null);
+						}
+					});
+				}
+			}
+		});
+		
 		jp5.setLayout( new GridLayout( 0, 1 ) );
 		jp5.add( j5 );
 		jp5.add( jt5 );
@@ -135,30 +196,64 @@ public class ShoppingAccountPage extends JFrame implements ActionListener{
 		});
 	}
 
+	/*
+	 *	jt1:
+	 *	1. 输入不能为空
+	 * 	2. 连接数据库
+	 * 	3. 显示数据
+	 */
 	@Override
 	public void actionPerformed( ActionEvent e ) {
-		gname = jt1.getText().toString();
-		String sql = "SELECT * FROM GOODS WHERE gname=?";
-		try {
-			pst = conn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS );
-			pst.setString( 1, gname );
-			rs = pst.executeQuery();
-			data.removeAllElements();
-			pack();
-			while( rs.next() ) {
-				Vector line = new Vector();
-				for( int i = 1; i <= 4; i++ ) {
-					line.add( rs.getObject(i) );
+		if( !jt1.getText().equals("") && jt1.getText()!=null && 
+				!jt1.getText().equals("请输入商品名") ) {
+			gname = jt1.getText().toString();
+			String sql = "SELECT * FROM GOODS WHERE gname=?";
+			conn = DbConn.getconn();
+			ResultSet rs = null;
+			try {
+				pst = conn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS );
+				pst.setString( 1, gname );
+				rs = pst.executeQuery();
+				data.removeAllElements();
+				pack();
+				if( rs.next() ) {
+					Vector line = new Vector();
+					for( int i = 1; i <= 4; i++ ) {
+						line.add( rs.getObject(i) );
+					}
+					data.add( line );
+					dataName = rs.getString(2);
+					dataPrice = rs.getInt( 3 );
+					dataNum = rs.getInt( 4 );
 				}
-				data.add( line );
-			} 
-			defaultModel.setDataVector( data, title );
-			pack();
-			DbClose.queryClose( pst, rs, conn );
-		}catch( SQLException sqle ) {
-			sqle.printStackTrace();
-		}finally {
-			DbClose.queryClose( pst, rs, conn );
+				else {
+					//输入为空
+					jt1.setText("商品不存在/商品名错误");
+					jt1.addMouseListener( new MouseAdapter() {
+						public void mouseClicked( MouseEvent me ) {
+							jt1.setText(null);
+						}
+					});
+				}
+				defaultModel.setDataVector( data, title );
+				pack();
+				DbClose.queryClose( pst, rs, conn );
+			}catch( SQLException sqle ) {
+				sqle.printStackTrace();
+			}finally {
+				DbClose.queryClose( pst, rs, conn );
+			}
+		}
+		else {
+			data.removeAllElements();
+			defaultModel.setDataVector( data ,  title );
+			jt2.setText(null);
+			jt1.setText("请输入商品名");
+			jt1.addMouseListener( new MouseAdapter() {
+				public void mouseClicked( MouseEvent me ) {
+					jt1.setText(null);
+				}
+			});
 		}
 	}
 
